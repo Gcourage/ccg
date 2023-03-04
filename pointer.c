@@ -77,6 +77,7 @@ inline size_t pointerDepth(Variable *var)
 }
 
 /* This function goes through all the pointers to find the type of the ultimately pointed integer ! */
+/* is pointer to point to vecoter type, is just a struct ? */
 IntegerType ultimateType(Variable *var)
 {
     while(var->type == _pointer)

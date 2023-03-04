@@ -39,7 +39,10 @@ typedef enum {_arithmetic, _bitwise, _logical, _operationtypemax} OperationType;
 typedef enum {_operandexpr, _ternaryexpr, _operationexpr, _testexpr, _assignmentexpr, _functioncallexpr, _expressiontypemax} ExpressionType;
 typedef enum {_assigninc, _assigndec_, _assigndiv, _assignmod, _assignmul, _assignand, _assignor, _assignxor, _assign, _leftshiftassign, _rightshiftassign, _assignopmax} AssignmentOp;
 
-typedef enum {_integer, _pointer, _vartypemax, _randomvartype = 42} VariableType;
+// add arm neon vector
+typedef enum {_int32x2_t, _vectmax} VectorType;
+
+typedef enum {_integer, _pointer, _vector, _vartypemax, _randomvartype = 42} VariableType;
 
 typedef uint8_t Permissions;
 
@@ -63,15 +66,23 @@ typedef struct Variable
             IntegerType type;
         } intvar;
 
+        // count depth of pointer
         struct Pointer
         {
             struct Variable *pointed;
         } pointer;
+
+        // add vector declaration, vector may not set here
+        struct Vector
+        {
+            VectorType type;
+        }vectVar;
     };
 
     VariableType type;
 } Variable;
 
+//
 typedef struct VL
 {
     Variable *variable;
